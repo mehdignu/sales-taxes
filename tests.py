@@ -12,6 +12,8 @@ class TestRequest(unittest.TestCase):
         chunked_dict = chunks(test_dict, 2)
         self.assertEqual(len(list(chunked_dict)), 2, "a dictionary should to be chunked correctly")
 
+class TestTaxCalculations(unittest.TestCase):
+
     def test_basic_sales_tax(self):
         pass
 
