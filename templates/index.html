@@ -1,0 +1,101 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+<form method="post">
+<div class="container">
+    <table id="myTable" class=" table order-list">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Quantity</td>
+            <td>Is imported</td>
+            <td>Category</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-sm-4">
+                <input type="text" name="name" class="form-control" required />
+            </td>
+            <td class="col-sm-2">
+                <input type="number" name="quantity"  class="form-control" required />
+            </td>
+            <td class="col-sm-3">
+                <input type="hidden" name="imported" value="false">
+                <input type="checkbox" name="imported" value="true">
+            </td>
+            <td class="col-sm-3">
+                <select class="form-control" name="category" required>
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+            </td>
+            <td class="col-sm-2"><a class="deleteRow"></a>
+
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" style="text-align: left;">
+                <input type="button" class="btn btn-lg btn-block" id="addrow" value="Add Row" />
+            </td>
+            <td colspan="2" style="text-align: right;">
+                <button type="submit" class="btn btn-lg btn-block">calculate</button>
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+</div>
+</form>
+
+<script>
+$(document).ready(function () {
+    var counter = 0;
+
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td><input required type="text" class="form-control" name="name' + counter + '"/></td>';
+        cols += '<td><input required type="number" class="form-control" name="quantity' + counter + '"/></td>';
+        cols += '<td><input type="hidden" name="imported' + counter + '" value="false"> <input type="checkbox" name="imported' + counter + '" value="true"></td>';
+        cols += '<td><input required type="text" class="form-control" name="category' + counter + '"/></td>';
+
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+    });
+
+
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1
+    });
+
+
+});
+
+
+
+function calculateRow(row) {
+    var price = +row.find('input[name^="price"]').val();
+
+}
+
+function calculateGrandTotal() {
+    var grandTotal = 0;
+    $("table.order-list").find('input[name^="price"]').each(function () {
+        grandTotal += +$(this).val();
+    });
+    $("#grandtotal").text(grandTotal.toFixed(2));
+}
+
+</script>
