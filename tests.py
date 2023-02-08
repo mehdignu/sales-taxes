@@ -20,9 +20,6 @@ class TestTaxCalculations(unittest.TestCase):
         goody.calculate_tax_rate()
         self.assertEqual(goody.tax, 10, "tax should to be 10%")
 
-    def round_to_value(self, number,roundto):
-        return (round(number / roundto) * roundto)
-
     def test_price_with_tax(self):
         goody = Goody("test", 1, "other", "other", 14.99)
         goody.calculate_tax_rate()
@@ -36,15 +33,18 @@ class TestTaxCalculations(unittest.TestCase):
         goody.calculate_price_with_tax()
         self.assertEqual(goody.price_with_tax, 14.99, "price with tax should to be 14.99")
 
-    def test_sales_tax_on_imported_non_exepted_goodies(self):
+    def test_sales_tax_on_imported_except_categories(self):
         goody = Goody("test", 1, "imported", "food", 10.00)
         goody.calculate_tax_rate()
         goody.calculate_price_with_tax()
         self.assertEqual(goody.price_with_tax, 10.50, "price with tax should to be 10.50")
 
-    def test_sales_tax_on_imported_except_categories(self):
-        pass
 
+    def test_sales_tax_on_imported_non_excempted_categories(self):
+        goody = Goody("test", 1, "imported", "other", 10.00)
+        goody.calculate_tax_rate()
+        goody.calculate_price_with_tax()
+        self.assertEqual(goody.price_with_tax, 11.50, "price with tax should to be 11.50")
 
 if __name__ == '__main__':
     unittest.main()
