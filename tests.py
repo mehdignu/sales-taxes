@@ -8,7 +8,7 @@ class TestRequest(unittest.TestCase):
         goody = format_request({"name": "test","quantity": 2,"status": "imported","category": "book", "price": 12.90})[0]
         self.assertEqual(goody.name, "test", "name should to be correct")
 
-    def test_chnks(self):
+    def test_chunks(self):
         test_dict = {"name": "test","quantity": 2,"status": "imported","category": "book", "price": 12.90}
         chunked_dict = chunks(test_dict, 2)
         self.assertEqual(len(list(chunked_dict)), 3, "a dictionary should to be chunked correctly")
@@ -25,7 +25,6 @@ class TestTaxCalculations(unittest.TestCase):
         goody.calculate_tax_rate()
         goody.calculate_price_with_tax()
         self.assertEqual(goody.price_with_tax, 16.49, "price with tax should to be 16.49")
-
 
     def test_sales_tax_on_exempt_categories(self):
         goody = Goody("test", 1, "other", "medical", 14.99)
