@@ -15,4 +15,8 @@ class Goody:
             self.tax = self.tax + 5
 
     def calculate_price_with_tax(self):
-        pass
+        if self.tax != 0:
+            calculated_price_with_tax = (self.price / self.tax) + self.price
+            self.price_with_tax = round(calculated_price_with_tax, 2)
+        else:
+            self.price_with_tax = self.price
