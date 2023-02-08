@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
-    if (request.method == 'POST') and (len(request.form) % 2 == 0):
+    if (request.method == 'POST'):
         format_request(request.form)
     return render_template('index.html')
 
