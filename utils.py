@@ -1,5 +1,6 @@
 from itertools import islice
 from Goody import Goody
+from Basket import Basket
 
 def chunks(data, SIZE=10000):
     it = iter(data)
@@ -15,3 +16,16 @@ def format_request(request):
         goody = Goody(name, quantity, status, category, price)
         goodies_list.append(goody)
     return goodies_list
+
+def calculate_goodies_prices(goodies):
+    total = 0
+    for goody in goodies:
+        goody.calculate_tax_rate()
+        goody.calculate_price_with_tax()
+        total = total+ goody.price_with_tax
+    return Basket(total)
+
+def show_reciept(goodies, basket):
+    for goody in goodies:
+        goody.display_goody()
+    print(f'total is {basket.total}')

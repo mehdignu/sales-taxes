@@ -44,6 +44,11 @@ class TestTaxCalculations(unittest.TestCase):
         goody.calculate_price_with_tax()
         self.assertEqual(goody.price_with_tax, 11.50, "price with tax should to be 11.50")
 
+    def test_imported_exempted_multiple_quantities(self):
+        goody = Goody("test", 2, "imported", "food", 10.00)
+        goody.calculate_tax_rate()
+        goody.calculate_price_with_tax()
+        self.assertEqual(goody.price_with_tax, 21.00, "price with tax should to be 21.00")
 
 if __name__ == '__main__':
     unittest.main()
