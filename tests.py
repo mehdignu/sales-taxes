@@ -17,7 +17,13 @@ class TestTaxCalculations(unittest.TestCase):
 
     def test_basic_sales_tax_on_non_imported_non_exempted_goods(self):
         goody = Goody("test", 1, "other", "other", 12.90)
-        tax_rate = goody.calculate_tax_rate()
+        goody.calculate_tax_rate()
+        self.assertEqual(goody.tax, 10, "tax should to be 10%")
+
+    def test_price_with_tax(self):
+        goody = Goody("test", 1, "other", "other", 12.90)
+        goody.calculate_tax_rate()
+        goody.calculate_price_with_tax()
 
 
     def test_sales_tax_on_exempt_categories(self):
