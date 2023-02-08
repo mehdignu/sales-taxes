@@ -12,4 +12,7 @@ pip install -r requirements.txt
 export FLASK_APP=tax
 export FLASK_ENV=development
 flask run
+open http://127.0.0.1:5000
 ```
+## assumptions
+- categories and status (imported / other) is hardcoded, can be seperated into a enumerations but will add complexity on the frontend when adding dynamic tabs.
