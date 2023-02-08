@@ -21,3 +21,6 @@ class Goody:
             self.price_with_tax = round(calculated_price_with_tax, 2)
         else:
             self.price_with_tax = self.price
+
+    def display_goody(self):
+        print(self.quantity, self.status, self.name, self.price_with_tax)
