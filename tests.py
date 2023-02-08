@@ -36,8 +36,11 @@ class TestTaxCalculations(unittest.TestCase):
         goody.calculate_price_with_tax()
         self.assertEqual(goody.price_with_tax, 14.99, "price with tax should to be 14.99")
 
-    def test_sales_tax_on_imported_goodies(self):
-        pass
+    def test_sales_tax_on_imported_non_exepted_goodies(self):
+        goody = Goody("test", 1, "imported", "food", 10.00)
+        goody.calculate_tax_rate()
+        goody.calculate_price_with_tax()
+        self.assertEqual(goody.price_with_tax, 10.50, "price with tax should to be 10.50")
 
     def test_sales_tax_on_imported_except_categories(self):
         pass
